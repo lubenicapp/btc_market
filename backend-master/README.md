@@ -2,16 +2,12 @@
 
 ## Level 1
 
-For this exercise to be done in two hours, I decided to keep it simple. Because it would take
+For this exercise to be done in two hours, I decided to keep it simple. Because it would taketoo much time to make it as clean as I want
 
-too much time to make it as clean as I want
-
-orders are stored in-memory
-
-no unit tests were written
-
-no validation is done for Order arguments
-
+- orders are stored in-memory
+- no unit tests were written
+- no validation is done for Order arguments
+- prices are not BigDecimal
 
 
 ## Code explanation
