@@ -3,11 +3,15 @@
 ## Level 1
 
 For this exercise to be done in two hours, I decided to keep it simple. Because it would take
+
 too much time to make it as clean as I want
 
 orders are stored in-memory
+
 no unit tests were written
+
 no validation is done for Order arguments
+
 
 
 ## Code explanation
@@ -33,7 +37,11 @@ otherwise you can run `ruby main.rb`
 
 ## Next steps
 
-docker-compose with postgresql for order storage
-units tests and integrations tests with Rspec
-argument validation
-error handling
+- docker-compose with postgresql for order storage
+
+- units tests and integrations tests with Rspec
+
+
+- argument validation
+- error handling
+
