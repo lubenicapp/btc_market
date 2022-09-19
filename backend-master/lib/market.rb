@@ -22,7 +22,7 @@ module BTCMarket
       {
         'bids' => bids,
         'base' => BASE,
-        'quite' => QUOTE,
+        'quote' => QUOTE,
         'asks' => asks
       }
     end
