@@ -4,13 +4,12 @@ require_relative 'lib/paymium_market'
 
 ###
 
-market = PaymiumMarket::BTCMarket.new
+market = PaymiumMarket::Market::BTCMarket.new
 
 puts '### new market :'
 
 puts "market depth : #{market.market_depth}"
 puts "market price : #{market.market_price}"
-
 
 puts '## adding orders'
 
