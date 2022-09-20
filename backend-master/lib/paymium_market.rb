@@ -4,9 +4,7 @@ require_relative 'market'
 require_relative 'models/order'
 require_relative 'db/db_connector'
 
-module BTCMarket
+module PaymiumMarket
   BUY = 'buy'
   SELL = 'sell'
-  BASE = 'BTC'
-  QUOTE = 'EUR'
 end

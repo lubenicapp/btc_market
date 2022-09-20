@@ -4,7 +4,7 @@
 # that will be replaced with a SQL connected if given enought time to polish
 # for the moment it's in-memory
 
-module BTCMarket
+module PaymiumMarket
   class DBConnector
     attr_reader :bids, :asks
 
@@ -35,7 +35,7 @@ module BTCMarket
 
     def add_order(order, side)
       @id += 1
-      side[@id] = [order.price, order.btc]
+      side[@id] = [order.price, order.amount]
     end
   end
 end

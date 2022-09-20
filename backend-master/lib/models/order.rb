@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
-module BTCMarket
+module PaymiumMarket
   module Models
     class Order
-      attr_reader :btc, :price, :side
+      attr_reader :amount, :price, :side
 
-      def initialize(btc, price, side)
-        @btc = btc
+      def initialize(amount:, price:, side:)
+        @amount = amount
         @price = price
         @side = side
       end

@@ -1,7 +1,11 @@
 # frozen_string_literal: true
 
-module BTCMarket
-  class Market
+module PaymiumMarket
+  class BTCMarket
+
+    BASE = 'BTC'
+    QUOTE = 'EUR'
+
     # sets the database connector
     def initialize(db_connector = DBConnector.new)
       @db = db_connector
