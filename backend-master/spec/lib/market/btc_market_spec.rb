@@ -63,7 +63,25 @@ RSpec.describe PaymiumMarket::Market::BTCMarket do
     it 'returns the correct market state with ordered orders' do
       expect(market_depth).to eq(expected_result)
     end
+  end
 
+  describe '#cancel_order' do
+    subject(:cancel_order) { market.cancel_order(id) }
+    let(:id) { 15 }
 
+    before { allow(db).to receive(:delete).with(id).and_return(true) }
+
+    context 'when called' do
+      it 'deletes the id from the db' do
+        cancel_order
+        expect(db).to have_received(:delete).with(id)
+      end
+    end
+
+    context 'when id exists' do
+      it 'returns true' do
+        expect(cancel_order).to eq(true)
+      end
+    end
   end
 end
