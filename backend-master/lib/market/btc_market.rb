@@ -39,11 +39,11 @@ module PaymiumMarket
       private
 
       def bids
-        @db.bids.reject { |_k, v| v.nil? }.values.sort_by { |order| order[0] }
+        @db.bids.reject { |_k, v| v.nil? }.values.sort_by { |order| - order[0] }
       end
 
       def asks
-        @db.asks.reject { |_k, v| v.nil? }.values.sort_by { |order| order[0] }
+        @db.asks.reject { |_k, v| v.nil? }.values.sort_by { |order| - order[0] }
       end
 
       def max_bid

@@ -5,6 +5,14 @@ RSpec.describe PaymiumMarket::Market::BTCMarket do
   let(:db) { instance_double(PaymiumMarket::DB::DBConnector, create: 0) }
   let(:order) { instance_double(PaymiumMarket::Models::Order) }
 
+  before do
+    allow(db).to receive(:bids).and_return(bids)
+    allow(db).to receive(:asks).and_return(asks)
+  end
+
+  let(:bids) { {} }
+  let(:asks) { {} }
+
   describe '#submit' do
     subject(:submit) { market.submit(order) }
 
@@ -22,13 +30,8 @@ RSpec.describe PaymiumMarket::Market::BTCMarket do
 
   describe '#market_price' do
     subject(:market_price) { market.market_price }
-    before { allow(db).to receive(:bids).and_return(bids) }
-    before { allow(db).to receive(:asks).and_return(asks) }
 
     context 'when there is no order' do
-      let(:bids) { {} }
-      let(:asks) { {} }
-
       it 'the market_price is 0' do
         expect(market_price).to eq(0)
       end
@@ -44,4 +47,23 @@ RSpec.describe PaymiumMarket::Market::BTCMarket do
     end
   end
 
+  describe '#market_depth' do
+    subject(:market_depth) { market.market_depth }
+
+    let(:bids) { { 0 => [5, 1], 2 => [14, 1] } }
+    let(:asks) { { 1 => [2, 2] } }
+
+    let(:expected_result) do
+      { 'bids' => [[14, 1], [5, 1]],
+        'base' => 'BTC',
+        'quote' => 'EUR',
+        'asks' => [[2, 2]] }
+    end
+
+    it 'returns the correct market state with ordered orders' do
+      expect(market_depth).to eq(expected_result)
+    end
+
+
+  end
 end
