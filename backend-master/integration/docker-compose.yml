@@ -1,0 +1,12 @@
+version: "3.8"
+
+services:
+  database:
+    image: 'mariadb:latest'
+    ports:
+      - "3306:3306"
+    environment:
+      - MARIADB_USER=joe
+      - MARIADB_PASSWORD=taxi
+      - MARIADB_ROOT_PASSWORD=burger
+      - MARIADB_DATABASE=paymium

@@ -7,7 +7,7 @@ module PaymiumMarket
       QUOTE = 'EUR'
 
       # sets the database connector
-      def initialize(db_connector = PaymiumMarket::DB::DBConnector.new)
+      def initialize(db_connector = PaymiumMarket::Database::InMemoryDB.new)
         @db = db_connector
       end
 
@@ -50,7 +50,6 @@ module PaymiumMarket
         max_order = @db.bids.values.max_by { |order| order[0] }
         return 0 if max_order.nil? || max_order[0].nil?
 
-        puts "max order : #{max_order[0]}"
         max_order[0]
       end
 
@@ -58,7 +57,6 @@ module PaymiumMarket
         min_order = @db.asks.values.max_by { |order| order[0] }
         return 0 if min_order.nil? || min_order[0].nil?
 
-        puts "min order : #{min_order[0]}"
         min_order[0]
       end
     end

@@ -4,7 +4,7 @@ require 'dry-initializer'
 
 require_relative 'market'
 require_relative 'models'
-require_relative 'db'
+require_relative 'database'
 
 module PaymiumMarket
   BUY = 'buy'

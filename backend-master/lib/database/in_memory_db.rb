@@ -5,8 +5,8 @@
 # for the moment it's in-memory
 
 module PaymiumMarket
-  module DB
-    class DBConnector
+  module Database
+    class InMemoryDB < PaymiumMarket::Database::Base
       attr_reader :bids, :asks
 
       # starts with two empty sides

@@ -2,7 +2,7 @@
 
 RSpec.describe PaymiumMarket::Market::BTCMarket do
   subject(:market) { described_class.new(db) }
-  let(:db) { instance_double(PaymiumMarket::DB::DBConnector, create: 0) }
+  let(:db) { instance_double(PaymiumMarket::Database::InMemoryDB, create: 0) }
   let(:order) { instance_double(PaymiumMarket::Models::Order) }
 
   before do
@@ -72,7 +72,7 @@ RSpec.describe PaymiumMarket::Market::BTCMarket do
     before { allow(db).to receive(:delete).with(id).and_return(true) }
 
     context 'when called' do
-      it 'deletes the id from the db' do
+      it 'deletes the id from the database' do
         cancel_order
         expect(db).to have_received(:delete).with(id)
       end
