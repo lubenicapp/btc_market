@@ -18,7 +18,7 @@ module PaymiumMarket
 
       # gives the market price
       def market_price
-        max_bid + min_ask / 2
+        (max_bid + min_ask) / 2.0
       end
 
       # returns a hash with the market status
@@ -49,14 +49,14 @@ module PaymiumMarket
       def max_bid
         max_order = @db.bids.values.max_by { |order| order[0] }
         return 0 if max_order.nil? || max_order[0].nil?
-
+        puts "max order : #{max_order[0]}"
         max_order[0]
       end
 
       def min_ask
         min_order = @db.asks.values.max_by { |order| order[0] }
         return 0 if min_order.nil? || min_order[0].nil?
-
+        puts "min order : #{min_order[0]}"
         min_order[0]
       end
     end

@@ -18,9 +18,9 @@ module PaymiumMarket
 
       # store the order if side is correctly set
       def create(order)
-        add_order(order, @bids) if order.side == BUY
-        add_order(order, @asks) if order.side == SELL
-        @id
+        return add_order(order, @bids) if order.buy?
+
+        add_order(order, @asks) if order.sell?
       end
 
       # checks if key exists in any of the side
@@ -37,6 +37,7 @@ module PaymiumMarket
       def add_order(order, side)
         @id += 1
         side[@id] = [order.price, order.amount]
+        @id
       end
     end
   end

@@ -10,6 +10,14 @@ module PaymiumMarket
         @price = price
         @side = side
       end
+
+      def buy?
+        @side == BUY
+      end
+
+      def sell?
+        @side == SELL
+      end
     end
   end
 end
