@@ -3,15 +3,16 @@
 RSpec.describe PaymiumMarket::Database::MysqlConnector, integration: true do
   subject(:mysql_connector) { described_class.new }
 
-  let(:db) {
+  let(:db) do
     Sequel.connect(
-    adapter: 'mysql2',
-    user: ENV['DB_USERNAME'],
-    host: ENV['DB_HOST'],
-    database: ENV['DATABASE'],
-    password: ENV['DB_PASSWORD']
-  ) }
-  let(:users) {db[:users] }
+      adapter: 'mysql2',
+      user: ENV['DB_USERNAME'],
+      host: ENV['DB_HOST'],
+      database: ENV['DATABASE'],
+      password: ENV['DB_PASSWORD']
+    )
+  end
+  let(:users) { db[:users] }
   let(:orders) { db[:orders] }
   let(:user_id) { db[:users].first[:id] }
 
@@ -19,8 +20,8 @@ RSpec.describe PaymiumMarket::Database::MysqlConnector, integration: true do
     orders.delete
     users.delete
     user_id = users.insert(btc: '10', eur: '15000')
-    orders.insert(side: 'buy', amount: '1', price: '100', user_id: user_id, state: 'created')
-    orders.insert(side: 'sell', amount: '2', price: '40', user_id: user_id, state: 'created')
+    orders.insert(side: 'buy', amount: '1', price: '100', user_id: user_id, state: 'created', market: 'BTC/EUR')
+    orders.insert(side: 'sell', amount: '2', price: '40', user_id: user_id, state: 'created', market: 'BTC/EUR')
   end
 
   after(:each) do
@@ -28,7 +29,7 @@ RSpec.describe PaymiumMarket::Database::MysqlConnector, integration: true do
     users.delete
   end
 
-  describe "#create" do
+  describe '#create' do
     subject(:create) { mysql_connector.create(order) }
     let(:order) { PaymiumMarket::Models::Order.new(amount: 10, price: 2, side: 'buy', user_id: user_id) }
 
@@ -85,14 +86,28 @@ RSpec.describe PaymiumMarket::Database::MysqlConnector, integration: true do
     end
   end
 
-  describe '#find_user' do
-    subject(:find_user) { mysql_connector.find_user(order_id) }
+  describe '#find_user_for_order' do
+    subject(:find_user_for_order) { mysql_connector.find_user_for_order(order_id) }
     let(:order_id) { orders.where(side: 'buy').first[:id] }
 
     context 'when called on an existing order id' do
       it 'returns the right user' do
-        expect(find_user[:btc]).to eq('10')
-        expect(find_user[:eur]).to eq('15000')
+        expect(find_user_for_order[:btc]).to eq('10')
+        expect(find_user_for_order[:eur]).to eq('15000')
+      end
+    end
+  end
+
+  describe '#change_user_balance' do
+    subject(:change_user_balance) { mysql_connector.change_user_balance(user_id, token, amount) }
+
+    context 'when token is btc' do
+      let(:token) { 'btc' }
+      let(:amount) { 2000 }
+
+      it 'changes the btc balance' do
+        change_user_balance
+        expect(BigDecimal(db[:users].where(id: user_id).first[token.to_sym])).to eq(BigDecimal('2010.0'))
       end
     end
   end

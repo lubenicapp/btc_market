@@ -4,6 +4,7 @@
 
 ### Added
 - support for mysql database
+- fee calculation
 
 ### Changed
 

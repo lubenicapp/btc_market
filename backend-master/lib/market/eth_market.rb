@@ -2,11 +2,12 @@
 
 module PaymiumMarket
   module Market
-    class BTCMarket < PaymiumMarket::Market::Base
+    class ETHMarket < PaymiumMarket::Market::Base
+
       # sets the database connector
       def initialize(db_connector = PaymiumMarket::Database::MysqlConnector.new("#{BASE}/#{QUOTE}"), fee = 0.25, fee_user_id = 1)
         @db = db_connector
-        @base = 'btc'
+        @base = 'eth'
         @quote = 'eur'
         @fee = fee
         @fee_user_id = fee_user_id

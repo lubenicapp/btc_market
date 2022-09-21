@@ -3,10 +3,10 @@
 require 'dry-initializer'
 require 'sequel'
 
+require_relative 'services'
 require_relative 'market'
 require_relative 'models'
 require_relative 'database'
-require_relative 'services'
 
 module PaymiumMarket
   BUY = 'buy'
