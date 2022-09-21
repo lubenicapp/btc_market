@@ -37,7 +37,7 @@ module PaymiumMarket
           begin
             resolve(max_bid, min_ask)
           rescue StandardError => e
-            puts e
+            return 0
           end
           return 1 + match
         end

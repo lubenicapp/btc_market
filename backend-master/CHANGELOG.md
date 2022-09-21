@@ -2,7 +2,11 @@
 
 ## [Unreleased]
 
+## [0.3.0]
+
 ### Added
+
+- eth market
 - support for mysql database
 - fee calculation
 

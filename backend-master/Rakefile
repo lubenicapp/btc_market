@@ -19,6 +19,7 @@ task :setup_db do
 
       column :eur, String
       column :btc, String
+      column :eth, String
     end
   end
 
@@ -37,6 +38,8 @@ task :setup_db do
 
   DATABASE[:users].insert(eur: '45000', btc: '10')
   DATABASE[:users].insert(eur: '1200', btc: '0.02')
+  DATABASE[:users].insert(eur: '45000', eth: '10')
+  DATABASE[:users].insert(eur: '1200', eth: '0.02')
 end
 
 task :clear_db do
