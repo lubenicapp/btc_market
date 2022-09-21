@@ -2,7 +2,7 @@
 
 RSpec.describe PaymiumMarket::Market::BTCMarket do
   subject(:market) { described_class.new(db) }
-  let(:db) { instance_double(PaymiumMarket::Database::InMemoryDB, create: 0) }
+  let(:db) { instance_double(PaymiumMarket::Database::InMemoryConnector, create: 0) }
   let(:order) { instance_double(PaymiumMarket::Models::Order) }
 
   before do

@@ -7,7 +7,7 @@ module PaymiumMarket
       QUOTE = 'EUR'
 
       # sets the database connector
-      def initialize(db_connector = PaymiumMarket::Database::InMemoryDB.new)
+      def initialize(db_connector = PaymiumMarket::Database::MysqlConnector.new)
         @db = db_connector
       end
 
@@ -39,11 +39,11 @@ module PaymiumMarket
       private
 
       def bids
-        @db.bids.reject { |_k, v| v.nil? }.values.sort_by { |order| - order[0] }
+        @db.bids.values.sort_by { |order| - order[0] }
       end
 
       def asks
-        @db.asks.reject { |_k, v| v.nil? }.values.sort_by { |order| - order[0] }
+        @db.asks.values.sort_by { |order| - order[0] }
       end
 
       def max_bid

@@ -178,7 +178,7 @@ If there is a match at 1 BTC with 27000€ per BTC then fees are (1 * 27000) * 0
 
  # buyer EUR balance is 17966.25 and BTC balance is 1
  # seller BTC balance is 2 and EUR balance is 26966,25
- # fee user EUR balance is 67.5 €
+ # fee user.rb EUR balance is 67.5 €
 
 ```
 

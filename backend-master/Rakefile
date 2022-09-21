@@ -1,0 +1,37 @@
+# frozen_string_literal: true
+
+require 'sequel'
+require_relative 'lib/paymium_market'
+
+desc 'database setup'
+task :setup_db do
+  DATABASE = Sequel.connect(
+    :adapter => 'mysql2',
+    :user => ENV['DB_USERNAME'],
+    :host => ENV ['DB_HOST'],
+    :database => ENV['DATABASE'] ,
+    :password=>ENV['DB_PASSWORD'])
+
+  unless DATABASE.table_exists?(:users)
+    DATABASE.create_table :users do
+      primary_key :id
+
+      column :eur, String
+      column :btc, String
+    end
+  end
+
+  unless DATABASE.table_exists?(:orders)
+    DATABASE.create_table :orders do
+      primary_key :id
+      foreign_key :user_id, :users
+
+      column :amount, String
+      column :price, String
+      column :side, String
+      column :state, String
+      column :market, String
+    end
+  end
+end
+
