@@ -3,15 +3,16 @@
 require 'sequel'
 require_relative 'lib/paymium_market'
 
+DATABASE = Sequel.connect(
+  :adapter => 'mysql2',
+  :user => ENV['DB_USERNAME'],
+  :host => ENV['DB_HOST'],
+  :database => ENV['DATABASE'] ,
+  :password=>ENV['DB_PASSWORD'])
+
+
 desc 'database setup'
 task :setup_db do
-  DATABASE = Sequel.connect(
-    :adapter => 'mysql2',
-    :user => ENV['DB_USERNAME'],
-    :host => ENV ['DB_HOST'],
-    :database => ENV['DATABASE'] ,
-    :password=>ENV['DB_PASSWORD'])
-
   unless DATABASE.table_exists?(:users)
     DATABASE.create_table :users do
       primary_key :id
@@ -33,5 +34,12 @@ task :setup_db do
       column :market, String
     end
   end
+
+  DATABASE[:users].insert(eur: '45000', btc: '10')
+  DATABASE[:users].insert(eur: '1200', btc: '0.02')
 end
 
+task :clear_db do
+  DATABASE[:orders].delete
+  DATABASE[:users].delete
+end

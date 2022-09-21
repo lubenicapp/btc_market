@@ -18,7 +18,7 @@ module PaymiumMarket
 
       # gives the market price
       def market_price
-        (max_bid + min_ask) / 2.0
+        (BigDecimal(max_bid) + BigDecimal(min_ask)) / 2.0
       end
 
       # returns a hash with the market status

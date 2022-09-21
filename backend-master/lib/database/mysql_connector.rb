@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Paymium
+module PaymiumMarket
   module Database
     class MysqlConnector < PaymiumMarket::Database::Base
 
@@ -29,11 +29,15 @@ module Paymium
       end
 
       def bids
-        orders.where(side: BUY).map { |order| { order[:id] => [order[:price], order[:amount]] }}
+        result = Hash.new
+        orders.where(side: BUY).each { |order| result[order[:id]] = [order[:price], order[:amount]] }
+        result
       end
 
       def asks
-        orders.where(side: SELL).map { |order| { order[:id] => [order[:price], order[:amount]] }}
+        result = Hash.new
+        orders.where(side: SELL).each { |order| result[order[:id]] = [order[:price], order[:amount]] }
+        result
       end
 
       private
