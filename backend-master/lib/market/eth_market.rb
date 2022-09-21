@@ -5,7 +5,7 @@ module PaymiumMarket
     class ETHMarket < PaymiumMarket::Market::Base
 
       # sets the database connector
-      def initialize(db_connector = PaymiumMarket::Database::MysqlConnector.new("#{BASE}/#{QUOTE}"), fee = 0.25, fee_user_id = 1)
+      def initialize(db_connector = PaymiumMarket::Database::MysqlConnector.new('ETH/EUR'), fee = 0.25, fee_user_id = 1)
         @db = db_connector
         @base = 'eth'
         @quote = 'eur'

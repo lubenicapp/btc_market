@@ -10,12 +10,14 @@ module PaymiumMarket
         @db.create(order)
       end
 
+      # calculate the market price
       def market_price
         ((BigDecimal(max_bid.price) + BigDecimal(min_ask.price)) / 2.0).to_f
       rescue NoMethodError
         0
       end
 
+      # describe the market state
       def market_depth
         {
           'bids' => bids.values.sort_by { |order| - BigDecimal(order[0]) },
@@ -25,6 +27,7 @@ module PaymiumMarket
         }
       end
 
+      # deletes an order from the database
       def cancel_order(id)
         @db.delete(id)
       end
@@ -37,7 +40,7 @@ module PaymiumMarket
           begin
             resolve(max_bid, min_ask)
           rescue StandardError => e
-            puts e
+            return 0
           end
           return 1 + match
         end

@@ -26,6 +26,32 @@ module PaymiumMarket
       def asks
         raise NoMethodError
       end
+
+      # returns a user
+      def find_user_for_order(order_id)
+        raise NoMethodError
+      end
+
+      # returns an order
+      def find_order(order_id)
+        raise NoMethodError
+      end
+
+      # returns a user
+      def find_user(user_id)
+        raise NoMethodError
+      end
+
+      # used to increase or decrease the token balance
+      # by amount
+      def change_user_balance(user_id, token, amount)
+        raise NoMethodError
+      end
+
+      # change order status to FILLED
+      def fill_order(order)
+        raise NoMethodError
+      end
     end
   end
 end
