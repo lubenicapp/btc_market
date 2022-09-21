@@ -6,6 +6,7 @@ require 'sequel'
 require_relative 'market'
 require_relative 'models'
 require_relative 'database'
+require_relative 'services'
 
 module PaymiumMarket
   BUY = 'buy'

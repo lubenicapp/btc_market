@@ -2,6 +2,15 @@
 
 ## [Unreleased]
 
+### Added
+- support for mysql database
+
+### Changed
+
+
+### Fixed
+- market_depth display strings
+
 ## [0.2.0]
 
 ### Added

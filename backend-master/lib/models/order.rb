@@ -24,7 +24,7 @@ module PaymiumMarket
       private
 
       def validate
-        #TODO
+        # TODO
       end
     end
   end

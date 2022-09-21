@@ -38,8 +38,8 @@ RSpec.describe PaymiumMarket::Market::BTCMarket do
     end
 
     context 'when there are orders in both sides' do
-      let(:bids) { { 0 => [5, 1] } }
-      let(:asks) { { 1 => [2, 2] } }
+      let(:bids) { { 0 => %w[5 1] } }
+      let(:asks) { { 1 => %w[2 2] } }
 
       it 'the market_price is correct' do
         expect(market_price).to eq(3.5)
@@ -50,14 +50,14 @@ RSpec.describe PaymiumMarket::Market::BTCMarket do
   describe '#market_depth' do
     subject(:market_depth) { market.market_depth }
 
-    let(:bids) { { 0 => [5, 1], 2 => [14, 1] } }
-    let(:asks) { { 1 => [2, 2] } }
+    let(:bids) { { 0 => %w[5 1], 2 => %w[14 1] } }
+    let(:asks) { { 1 => %w[2 2] } }
 
     let(:expected_result) do
-      { 'bids' => [[14, 1], [5, 1]],
+      { 'bids' => [%w[14 1], %w[5 1]],
         'base' => 'BTC',
         'quote' => 'EUR',
-        'asks' => [[2, 2]] }
+        'asks' => [%w[2 2]] }
     end
 
     it 'returns the correct market state with ordered orders' do

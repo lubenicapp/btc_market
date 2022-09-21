@@ -3,13 +3,13 @@
 module PaymiumMarket
   module Database
     class MysqlConnector < PaymiumMarket::Database::Base
-
       DATABASE = Sequel.connect(
-        :adapter => 'mysql2',
-        :user => ENV['DB_USERNAME'],
-        :host => ENV['DB_HOST'],
-        :database => ENV['DATABASE'] ,
-        :password=>ENV['DB_PASSWORD'])
+        adapter: 'mysql2',
+        user: ENV['DB_USERNAME'],
+        host: ENV['DB_HOST'],
+        database: ENV['DATABASE'],
+        password: ENV['DB_PASSWORD']
+      )
 
       def create(order)
         orders.insert(
@@ -17,7 +17,8 @@ module PaymiumMarket
           price: order.price,
           side: order.side,
           state: CREATED,
-          user_id: order.user_id)
+          user_id: order.user_id
+        )
       end
 
       def delete(id)
@@ -29,15 +30,20 @@ module PaymiumMarket
       end
 
       def bids
-        result = Hash.new
-        orders.where(side: BUY).each { |order| result[order[:id]] = [order[:price], order[:amount]] }
+        result = {}
+        orders.where(side: BUY, state: CREATED).each { |order| result[order[:id]] = [order[:price], order[:amount]] }
         result
       end
 
       def asks
-        result = Hash.new
-        orders.where(side: SELL).each { |order| result[order[:id]] = [order[:price], order[:amount]] }
+        result = {}
+        orders.where(side: SELL, state: CREATED).each { |order| result[order[:id]] = [order[:price], order[:amount]] }
         result
+      end
+
+      def find_user(order_id)
+        user_id = orders.where(id: order_id).first[:user_id]
+        users.where(id: user_id).first
       end
 
       private

@@ -4,12 +4,12 @@ require 'sequel'
 require_relative 'lib/paymium_market'
 
 DATABASE = Sequel.connect(
-  :adapter => 'mysql2',
-  :user => ENV['DB_USERNAME'],
-  :host => ENV['DB_HOST'],
-  :database => ENV['DATABASE'] ,
-  :password=>ENV['DB_PASSWORD'])
-
+  adapter: 'mysql2',
+  user: ENV['DB_USERNAME'],
+  host: ENV['DB_HOST'],
+  database: ENV['DATABASE'],
+  password: ENV['DB_PASSWORD']
+)
 
 desc 'database setup'
 task :setup_db do

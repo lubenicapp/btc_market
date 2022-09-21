@@ -7,7 +7,6 @@
 module PaymiumMarket
   module Database
     class InMemoryConnector < PaymiumMarket::Database::Base
-
       # starts with two empty sides
       def initialize
         @bids = {}
@@ -38,6 +37,7 @@ module PaymiumMarket
       def asks
         @asks.reject { |_k, v| v.nil? }
       end
+
       private
 
       def add_order(order, side)
