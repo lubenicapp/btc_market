@@ -42,6 +42,12 @@ module PaymiumMarket
 
       private
 
+
+
+      # The two method looks the same but i believe it is accidental because
+      # the resolution algorithm is simplified
+      # this is why i keep it split even if i could 'DRY' it
+      #
       def resolve_seller(seller, order)
         token_amount = BigDecimal(order[:amount])
         eur_raw = token_amount * BigDecimal(order[:price])
