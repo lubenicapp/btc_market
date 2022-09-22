@@ -6,6 +6,7 @@
 
 - rename sample.env as .env and provide database information if different
 - in a terminal run the database `docker-compose -f integration/docker-compose.yml up`
+- install dependencies with `bundle`
 - in another terminal, setup and seed the database `bundle exec dotenv rake setup_db`
 - run the tests `bundle exec dotenv rspec`
 - run the demonstration main.rb `bundle exec dotenv ruby main.rb`
@@ -86,6 +87,6 @@ beside the bugs that might appear here and there, here are the main improvements
 
 - Structure can be a lot cleaner with an ORM
 - Depends on the first point but : model validation (negative balance, wrong datatype...)
-- Database integrity : the matching operation should save the state before changing the users balance so if any part of the operation fails, we can restore to a snapshot
+- Database integrity : the matching operation should save the state before changing the users balance so if any part of the operation fails, we can restore to a snapshot, or at least a prepare/execute steps
 - testing : I was easy on integration tests since the main.rb acts like one
 - the storage of BigDecimal value as string might not be efficient
